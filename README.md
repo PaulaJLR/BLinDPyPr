@@ -1,6 +1,5 @@
 # BLinDPyPr
-Perform probe-guided blind docking with FTMap and DOCK6  
--------------------------------------------------------
+**Perform probe-guided blind docking with FTMap and DOCK6**  
 
 BLinDPyPr --Blind Ligand Docking through Preliminary Probing-- is a Python pipeline that associates automation and conversion scripts with well established programs such as FTMap and DOCK6 in order to introduce a novel approach to blind docking.  
 FTMap docked probe clusters are converted into DOCK6 spheres for determining binding regions. Because these spheres are solely derived from FTMap probes, their locations are contained in and specific to multiple potential binding pockets, which become the regions that are simultaneously probed and chosen by the search algorithm based on the properties of each candidate ligand.  
