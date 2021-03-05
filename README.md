@@ -23,12 +23,12 @@ BLinDPyPr can use Selenium and Chromedriver to automatically submit jobs to FTMa
 
 ## Usage
 ```
-~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~
- Perform probe-guided docking with FTMap and DOCK6
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~~~
+     Perform probe-guided docking with FTMap and DOCK6
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   By Paula Jofily
-  Please cite:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Please cite: https://doi.org/10.3390/molecules26051224
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 optional arguments:
 -h, --help           show this help message and exit
