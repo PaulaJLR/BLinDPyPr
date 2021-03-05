@@ -12,16 +12,13 @@ from random import randint
 ### parser
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
 description="""
-  ~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~
-   Perform probe-guided docking with FTMap and DOCK6
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~~~
+       Perform probe-guided docking with FTMap and DOCK6
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     By Paula Jofily
-    Please cite:
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""")
-# args
-## positional
-#parser.add_argument('lig_file', metavar='ligand', type=str, help='Ligand(s) file. Format: .mol2')
-#parser.add_argument('dock_path', metavar='dock6_home', type=str, help='DOCK6 installation path where bin and parameters folders are located. Ex.: /home/username/dock6.9')
+    Please cite: https://doi.org/10.3390/molecules26051224
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""")
+#
 
 #receptor and ftmap
 ft = parser.add_argument_group('Receptor and ftmap arguments')
@@ -48,9 +45,6 @@ dock.add_argument('--sphgen', metavar='[0,1,2]', type=str, help='Create classic 
 
 args = parser.parse_args();
 
-### while testing
-#os.chdir('/mnt/sda/paula/programs/autochemical')
-#args = parser.parse_args(['fftmap.78236.pdb', 'crystal_ligand.mol2', '/home/paula/dock.6.8_source/dock6', '--sphgen', '--cross', '000,001,003,006,011'])
 ##
 workingdir = os.getcwd()
 os.chdir(workingdir)
@@ -59,12 +53,12 @@ os.chdir(workingdir)
 ### logfile
 logfile = open('blindpypr.log', 'a+')
 logfile.write("""
-  ~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~
-   Perform probe-guided docking with FTMap and DOCK6
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~ BLinDPyPr ~~~~~~~~~~~~~~~~~~~~~~~~
+       Perform probe-guided docking with FTMap and DOCK6
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     By Paula Jofily
-    Please cite:
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n""")
+    Please cite: https://doi.org/10.3390/molecules26051224
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n""")
 logfile.write("  -- Section created on "+datetime.datetime.now().strftime("%d %b %Y %H:%M"+" --\n\n"))
 
 def logit(string): #write to log and print stuff
@@ -228,7 +222,6 @@ def autoftmap(args, workingdir, logfile):
     page = driver.page_source.encode("utf-8")
     page = str(page)
     find = re.compile(jobnm_inp+'(.*?</tr>)'); found = re.search(find, page)
-    #2v7a</td><td>error on local system</td></tr>
     found = found.group().split('>')[-3].split('<')[0]
     if found != 'finished':
         success = False
@@ -256,8 +249,6 @@ def autoftmap(args, workingdir, logfile):
         dl_sum = driver.find_element_by_id('summarylink')
         dl_sum.click()
         return(job_id)
-    #except:
-        #return(False)
 
 
 if args.fteg is True:
@@ -419,7 +410,7 @@ mssg = '> FTmap file used: '+ftmap_file+'\n'; logfile.write(mssg)
 mssg = '> FTMap cross clusters used: ' + ','.join(map(str, cross))+'\n'
 print(mssg); logfile.write(mssg)
 logfile.write('> Ligand file: '+args.lig_file+'\n')
-# get index where every structure starts (ptn ou crosscl):
+# get index where every structure starts (ptn or crosscl):
 ind = np.where(np.asarray([i[:6] for i in ftmap])=='HEADER')[0]
 
 ### separate protein if mol2 receptor not given by user:
@@ -551,7 +542,6 @@ else:
     sph['cooz'] = [str(i)+'0'*(8-len(str(i))) for i in sph['cooz']] # 8 algarisms
     sph['radius'] = sph['radius'].round(3)
     sph['radius'] = [str(i)+'0'*(5-len(str(i))) for i in sph['radius']]
-    # transformar o ph4name nos numeros das esferas do chemical matching:
     # transform ph4name into chemical matching sphere numbers:
     mapping = {'PHO': 1, 'HBD': 2, 'HBA':3, 'ARO':4, 'RNG':5, 'NEG':6,'POS':7}
     chem=sph['ph4name'].replace(mapping)
@@ -865,18 +855,3 @@ else: timed = str(elaps.seconds)+" seconds\n"
 logfile.write("Elapsed time for docking: "+timed)
 logfile.write("Done :D\n\n\n"); logfile.close()
 print('Done!')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### area de teste
