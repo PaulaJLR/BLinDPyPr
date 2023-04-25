@@ -479,7 +479,7 @@ def formatstr(i):
 def make_sphgen():
     chimera_in='''from chimera import runCommand, openModels, MSMSModel
 # generate surface using 'surf' command
-runCommand("surf")
+runCommand("surf allComponents false")
 # get the surf object
 surf = openModels.list(modelTypes=[MSMSModel])[0]
 # write DMS
